@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <!-- Link para o CSS do Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            body {
+                background-color: #f8f9fa; /* Cor de fundo clara */
+            }
+        </style>
+    </head>
+    <body class="container mt-5">
+        
+        <h1 class="mb-4">Adicionar Jogo</h1>
+        <form method="POST" action="/" class="mb-4">
+            <div class="form-group">
+                <input type="text" name="title" class="form-control" placeholder="Título do Jogo" required>
+            </div>
+            <input type="submit" value="Adicionar" class="btn btn-primary">
+        </form>
+
+        <h1 class="mb-4">Jogos</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Atualizar</th>
+                    <th>Deletar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for game in games %}
+                <tr>
+                    <td>{{ game.title }}</td>
+                    <td>
+                        <form method="POST" action="./update" style="display: inline">
+                            <input type="hidden" value="{{ game.title }}" name="oldtitle">
+                            <input type="text" value="{{ game.title }}" name="newtitle" class="form-control" style="display:inline; width:auto;">
+                            <input type="submit" value="Atualizar" class="btn btn-warning btn-sm">
+                        </form>
+                    </td>
+                    <td>
+                        <form method="POST" action="./delete" style="display: inline">
+                            <input type="hidden" value="{{ game.title }}" name="title">
+                            <input type="submit" value="Deletar" class="btn btn-danger btn-sm">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Link para o JavaScript do Bootstrap (opcional) -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    </body>
+</html>
